@@ -1,0 +1,5 @@
+(defun pascal (x y)
+  (cond ((= x 0) 1)
+        ((= x y) 1)
+        ((> x y) nil)
+        ((+ (pascal (- x 1) (- y 1)) (pascal x (- y 1))))))
