@@ -1,6 +1,6 @@
 (defun new-if (pre then else)
   (cond (pre then)
-	(else else)))
+        (else)))
 
 (new-if t (print "1") (print "2"))
 
