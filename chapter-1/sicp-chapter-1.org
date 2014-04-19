@@ -367,3 +367,53 @@ What happens when Alyssa attempts to use this to compute square roots? Explain.
   (In section 1.3.4 we will see how to implement
   Newton's method in general as an abstraction of these square-root and
   cube-root procedures.)
+
+算法过程与开平方类似：
+
+#+begin_src scheme
+(define (abs x)
+  (if (< x 0) (- 0 x) x))
+
+(define (square x)
+  (* x x))
+
+(define (good-enough? old-guess new-guess)
+  (display (format "~a\n" old-guess))
+  (< (/ (abs (- new-guess old-guess)) old-guess) 0.0001))
+
+(define (improve guess x)
+  (/ (+ (* 2 guess) (/ x (* guess guess))) 3))
+
+(define (cube-root-iter guess x)
+  (let ((new-guess (improve guess x)))
+    (if (good-enough? guess new-guess) guess
+        (cube-root-iter new-guess x))))
+
+(define (cube-root x)
+  (cube-root-iter 1.0 x))
+
+(cube-root 0.000000008)
+#+end_src
+
+#+begin_example
+1.0
+0.6666666693333334
+0.44444445222222223
+0.296296314981481
+0.19753090702931686
+0.13168733969659827
+0.08779171357094338
+0.05852815503580874
+0.03901954848882324
+0.026014783802133092
+0.017347129492363524
+0.011573614622429779
+0.007735651222160343
+0.005201663871345835
+0.003566332162406482
+0.0025872193951923263
+0.0021231972308747436
+0.0020070101831742913
+0.002000024457002051
+0.002000024457002051
+#+end_example
